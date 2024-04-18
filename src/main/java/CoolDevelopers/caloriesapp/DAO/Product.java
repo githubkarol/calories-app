@@ -15,6 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Product {
 
+    public Product(String name) {
+        this.name = name;
+    }
+
     @Id
     private ObjectId productId;
     private String name;
