@@ -19,6 +19,11 @@ public class Product {
         this.name = name;
     }
 
+    public Product(ObjectId productId, String name) {
+        this.productId = productId;
+        this.name = name;
+    }
+
     @Id
     private ObjectId productId;
     private String name;

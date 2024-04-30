@@ -2,6 +2,7 @@ package CoolDevelopers.caloriesapp.Controller;
 
 import CoolDevelopers.caloriesapp.DAO.Product;
 import CoolDevelopers.caloriesapp.Service.ProductService;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,5 +42,13 @@ class ProductControllerTest {
 
     @Test
     void getProduct() throws Exception {
+        // Given
+        Product product1 = new Product(ObjectId.get(), "Egg");
+        when(productService.getSingleProduct(product1.getProductId())).thenReturn(Optional.of(product1));
+
+        // Then
+        mockMvc.perform(MockMvcRequestBuilders.get("api/v1/products/{id}").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{\"productId\":1, \"name\":\"Egg\"}]"));
     }
 }
