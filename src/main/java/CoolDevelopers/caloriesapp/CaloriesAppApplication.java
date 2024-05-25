@@ -15,6 +15,6 @@ public class CaloriesAppApplication {
 
 	@GetMapping("/")
 	public String hello() {
-		return "Hello from the backend";
+		return "Please use '/api/v1/products' endpoint to see available products";
 	}
 }
